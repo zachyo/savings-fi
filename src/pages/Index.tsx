@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Dashboard } from "../components/Dashboard";
 import type { Student } from "../types";
 import { useStudentsContext } from "../context";
@@ -26,7 +26,6 @@ const DashboardPage = () => {
     // Remove student from the list
     setStudents(students.filter((s) => s.id !== withdrawingStudent.id));
 
-    // Show success message
     toast.success(
       `${withdrawingStudent.name} has successfully withdrawn ₦${(
         withdrawingStudent.amount +
