@@ -9,6 +9,7 @@ import { labelVariants } from "../lib/constants";
 
 import type { Tier } from "../types/index";
 import { cn } from "../lib/utils";
+import { useNavigate } from "react-router-dom";
 
 export function StudentRegistrationForm() {
   const { handleStudentRegister } = useStudentsContext();
@@ -16,6 +17,7 @@ export function StudentRegistrationForm() {
   const [selectedTier, setSelectedTier] = useState<number | null>(null);
   const [amount, setAmount] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   const inputClass =
     "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm";
@@ -61,7 +63,10 @@ export function StudentRegistrationForm() {
     };
 
     // Register the student
-    handleStudentRegister(newStudent);
+    const result = handleStudentRegister(newStudent);
+    if (result.success) {
+      navigate("/dashboard");
+    }
 
     // Reset form
     setName("");
